@@ -1,4 +1,4 @@
-document.getElementById('email-form').addEventListener('submit', function(event) {
+document.getElementById('email-form-custom).addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission
 
     // Grab form data
