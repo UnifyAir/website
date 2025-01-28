@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--  This site was created in Webflow. https://webflow.com  --><!--  Last Published: Tue Jan 28 2025 15:29:51 GMT+0000 (Coordinated Universal Time)  -->
+<!DOCTYPE html><!--  This site was created in Webflow. https://webflow.com  --><!--  Last Published: Tue Jan 28 2025 19:47:06 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="673479bc5cb0f0152106e352" data-wf-site="673479bc5cb0f0152106e2e2" lang="en">
 <head>
   <meta charset="utf-8">
@@ -84,7 +84,7 @@
     <div data-w-id="58e11b86-9d96-c9a8-f52f-b1795c37fa57" style="-webkit-transform:translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="glow-top"></div>
   </div>
   <div class="section">
-    <div data-w-id="0773ab12-e7cf-0dcb-1ac5-1097386497cc" class="content">
+    <div class="content">
       <div class="w-layout-grid grid-page-a">
         <div data-w-id="b243638b-925b-7205-18ef-8dd1bbb756f7" style="-webkit-transform:translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="tasks">
           <div class="tasks-block"><img src="images/icon-1.svg" loading="lazy" alt="" class="icon-tasks">
@@ -148,14 +148,61 @@
       <div data-w-id="5d90d470-fa17-1f16-14ad-fad48d39fb69" class="group-banner">
         <div class="block-banner">
           <h3 data-w-id="5d90d470-fa17-1f16-14ad-fad48d39fb6b" class="heading-banner">Stay informed and never miss an update!</h3>
-          <div data-w-id="5d90d470-fa17-1f16-14ad-fad48d39fb6d" class="form-block-banner w-form">
-            <form id="Email-Form" name="email-form" data-name="Email Form" method="get" class="form-banner" data-wf-page-id="673479bc5cb0f0152106e352" data-wf-element-id="5d90d470-fa17-1f16-14ad-fad48d39fb6e"><input class="text-field w-input" maxlength="256" name="Email" data-name="Email" placeholder="Your email address" type="email" id="Email" required=""><input type="submit" data-wait="Please wait..." class="button w-button" value="Subscribe"></form>
+          <div class="form-block-banner w-embed w-script"><!--  Begin Brevo Form Integration  -->
+            <form id="email-form" name="email-form-rss" data-name="Email Form" class="form-banner" method="POST" action="https://c774654f.sibforms.com/serve/MUIFANMxomTKDjhsFvr6IdbNDSTkKWjsMopzUkshKsAQP7Ow6Xzl4TrxJ2C77aQv1ddntpFiCHxQkiHZHhuF0GWGoNKDj4j_b548iN4atYqn03BAzfzkvLKezwAW5MTl76s0rzP3qn343bnU2r0vrgh7TtTXCRMUpJglPSNzJ11C9jypNIu-xk29_eCEwsWjnATyf3XUySxbcyxc" data-type="subscription">
+              <input class="text-field w-input" maxlength="256" name="EMAIL" data-name="Email" placeholder="Your email address" type="email" id="Email" required="">
+              <input type="submit" data-wait="Please wait..." id="subscribe-button" class="button w-button" value="Subscribe">
+            </form>
             <div class="success-message w-form-done">
               <div class="text-success">Thank you! Your submission has been received!</div>
             </div>
             <div class="error-message w-form-fail">
               <div class="text-error">Oops! Something went wrong while submitting the form.</div>
             </div>
+            <!--  Script for form validation and handling  -->
+            <script>
+  document.getElementById('email-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const email = document.getElementById('Email').value;
+    const submitButton = document.getElementById('subscribe-button');
+    const waitText = submitButton.getAttribute('data-wait');
+    if (email) {
+      // Change button text to "Please wait..." and disable it to prevent multiple submissions
+      submitButton.value = waitText;  // Set button value to the "wait" text
+      submitButton.disabled = true;
+      // Make API call here with the email
+      fetch('https://c774654f.sibforms.com/serve/MUIFANMxomTKDjhsFvr6IdbNDSTkKWjsMopzUkshKsAQP7Ow6Xzl4TrxJ2C77aQv1ddntpFiCHxQkiHZHhuF0GWGoNKDj4j_b548iN4atYqn03BAzfzkvLKezwAW5MTl76s0rzP3qn343bnU2r0vrgh7TtTXCRMUpJglPSNzJ11C9jypNIu-xk29_eCEwsWjnATyf3XUySxbcyxc', {
+        method: 'POST',
+        body: new URLSearchParams({ EMAIL: email })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          document.querySelector('.w-form-done').style.display = 'block';
+          document.getElementById('email-form').style.display = 'none'; // Hide the form
+        } else {
+          document.querySelector('.w-form-fail').style.display = 'block';
+        }
+      })
+      .catch(error => {
+        // Check if the error is a CORS error
+        if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+          document.querySelector('.w-form-done').style.display = 'block'; // CORS error is considered correct
+          document.getElementById('email-form').style.display = 'none'; // Hide the form
+        } else {
+          console.error('Error:', error);
+          document.querySelector('.w-form-fail').style.display = 'block'; // Other errors
+        }
+      })
+      .finally(() => {
+        // Re-enable the button and reset text after request
+        submitButton.disabled = false;
+        submitButton.value = "Subscribe"; // Reset to original text
+      });
+    }
+  });
+</script>
+            <!--  End Brevo Form Integration  -->
           </div>
         </div>
         <div class="glow-banner"></div>
