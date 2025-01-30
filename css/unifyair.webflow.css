@@ -30,6 +30,12 @@
   display: flex;
 }
 
+.w-layout-vflex {
+  flex-direction: column;
+  align-items: flex-start;
+  display: flex;
+}
+
 body {
   background-color: var(--background-a);
   color: var(--paragraphs);
@@ -1233,6 +1239,10 @@ figcaption {
   margin-left: 0;
 }
 
+.team-member {
+  position: static;
+}
+
 .image-member {
   background-image: linear-gradient(140deg, var(--background-b2), var(--background-b3));
   object-fit: cover;
@@ -2228,6 +2238,7 @@ figcaption {
 .link-block {
   width: 40px;
   height: 40px;
+  margin-left: 0;
 }
 
 .div-block-2 {
@@ -2353,6 +2364,26 @@ figcaption {
 
 .div-block-4 {
   width: 100%;
+}
+
+.flex-block-2 {
+  grid-column-gap: 39px;
+  grid-row-gap: 39px;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-span {
+  color: var(--heading);
+  font-size: 20px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.link-block-copy {
+  width: 30px;
+  height: 40px;
+  margin-left: 0;
 }
 
 @media screen and (max-width: 991px) {
