@@ -8,28 +8,33 @@
 
 
 <url>
-  <loc>https://unifyair.com/</loc>
-  <lastmod>2025-01-28T15:38:27+00:00</lastmod>
+  <loc>https://unifyair.io/</loc>
+  <lastmod>2025-06-12T16:22:26+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://unifyair.com/index.html</loc>
-  <lastmod>2025-01-28T15:38:27+00:00</lastmod>
+  <loc>https://github.com/unifyair/unifyair-core</loc>
+  <lastmod>2025-06-12T16:22:26+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://unifyair.io/index.html</loc>
+  <lastmod>2025-06-12T16:22:26+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://unifyair.com/about.html</loc>
-  <lastmod>2025-01-28T15:38:27+00:00</lastmod>
+  <loc>https://unifyair.io/about.html</loc>
+  <lastmod>2025-06-12T16:22:26+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://unifyair.com/contact.html</loc>
-  <lastmod>2025-01-28T15:38:27+00:00</lastmod>
+  <loc>https://unifyair.io/contact.html</loc>
+  <lastmod>2025-06-12T16:22:26+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.unifyair.com</loc>
-  <lastmod>2025-01-28T15:38:27+00:00</lastmod>
+  <loc>https://docs.unifyair.io</loc>
+  <lastmod>2025-06-12T16:22:26+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 </urlset>
