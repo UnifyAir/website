@@ -162,8 +162,8 @@
       <div data-w-id="5d90d470-fa17-1f16-14ad-fad48d39fb69" class="group-banner">
         <div class="block-banner">
           <h3 data-w-id="5d90d470-fa17-1f16-14ad-fad48d39fb6b" class="heading-banner">Stay informed and never miss an update!</h3>
-          <div data-w-id="10429102-e0c2-208b-a562-6d06e3b7ac55" class="form-block-banner w-embed w-script"><!--  Begin Brevo Form Integration  -->
-            <form id="email-form" name="email-form-rss" data-name="Email Form" class="form-banner" method="POST" action="https://c774654f.sibforms.com/serve/MUIFANMxomTKDjhsFvr6IdbNDSTkKWjsMopzUkshKsAQP7Ow6Xzl4TrxJ2C77aQv1ddntpFiCHxQkiHZHhuF0GWGoNKDj4j_b548iN4atYqn03BAzfzkvLKezwAW5MTl76s0rzP3qn343bnU2r0vrgh7TtTXCRMUpJglPSNzJ11C9jypNIu-xk29_eCEwsWjnATyf3XUySxbcyxc" data-type="subscription">
+          <div data-w-id="10429102-e0c2-208b-a562-6d06e3b7ac55" class="form-block-banner w-embed w-script">
+            <form id="email-form" name="email-form-rss" data-name="Email Form" class="form-banner" method="get">
               <input class="text-field w-input" maxlength="256" name="EMAIL" data-name="Email" placeholder="Your email address" type="email" id="Email" required="">
               <input type="submit" data-wait="Please wait..." id="subscribe-button" class="button w-button" value="Subscribe">
             </form>
@@ -173,50 +173,55 @@
             <div class="error-message w-form-fail">
               <div class="text-error">Oops! Something went wrong while submitting the form.</div>
             </div>
-            <!--  Script for form validation and handling  -->
             <script>
   document.getElementById('email-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const email = document.getElementById('Email').value;
+    const firstName = '';
+    const lastName = '';
+    const message = '';
+    // Construct query parameters
+    const params = new URLSearchParams({ firstName, lastName, email, message }).toString();
+    // Base URL for your Google Apps Script
+    const baseURL = "https://script.google.com/macros/s/AKfycbzvUU8XDDZ5cQve6GBDPiV0o1OVv_-QrFjHknlU2tNWGI8KgyWlCsc_d4E0-GKC2Ep1/exec";
+    const urlWithParams = `${baseURL}?${params}`;
+    // Fetch elements for success/error messages and the form
+    const successDiv   = document.querySelector('.success-message');
+    const errorDiv     = document.querySelector('.error-message');
+    const form         = document.getElementById('email-form');
     const submitButton = document.getElementById('subscribe-button');
-    const waitText = submitButton.getAttribute('data-wait');
-    if (email) {
-      // Change button text to "Please wait..." and disable it to prevent multiple submissions
-      submitButton.value = waitText;  // Set button value to the "wait" text
-      submitButton.disabled = true;
-      // Make API call here with the email
-      fetch('https://c774654f.sibforms.com/serve/MUIFANMxomTKDjhsFvr6IdbNDSTkKWjsMopzUkshKsAQP7Ow6Xzl4TrxJ2C77aQv1ddntpFiCHxQkiHZHhuF0GWGoNKDj4j_b548iN4atYqn03BAzfzkvLKezwAW5MTl76s0rzP3qn343bnU2r0vrgh7TtTXCRMUpJglPSNzJ11C9jypNIu-xk29_eCEwsWjnATyf3XUySxbcyxc', {
-        method: 'POST',
-        body: new URLSearchParams({ EMAIL: email })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'success') {
-          document.querySelector('.w-form-done').style.display = 'block';
-          document.getElementById('email-form').style.display = 'none'; // Hide the form
-        } else {
-          document.querySelector('.w-form-fail').style.display = 'block';
+    // Optionally hide both messages before sending the request
+    successDiv.style.display = 'none';
+    errorDiv.style.display   = 'none';
+    // Change button text to data-wait and disable it
+    const originalButtonText = submitButton.value;
+    submitButton.value       = submitButton.getAttribute('data-wait');
+    submitButton.disabled    = true;
+    // Send GET request
+    fetch(urlWithParams, { method: 'GET' })
+      .then(response => {
+        // Check for HTTP errors (4xx, 5xx)
+        if (!response.ok) {
+          throw new Error(`HTTP error: ${response.status}`);
         }
+        return response.text(); // or response.json() if you expect JSON
+      })
+      .then(data => {
+        // On success, show the success message and hide the form
+        successDiv.style.display = 'block';
+        form.style.display       = 'none';
+        console.log("Submission succeeded:", data);
       })
       .catch(error => {
-        // Check if the error is a CORS error
-        if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-          document.querySelector('.w-form-done').style.display = 'block'; // CORS error is considered correct
-          document.getElementById('email-form').style.display = 'none'; // Hide the form
-        } else {
-          console.error('Error:', error);
-          document.querySelector('.w-form-fail').style.display = 'block'; // Other errors
-        }
-      })
-      .finally(() => {
-        // Re-enable the button and reset text after request
+        // On error, show the error message
+        errorDiv.style.display = 'block';
+        console.error("Submission failed:", error);
+        // Reset button text and re-enable
+        submitButton.value    = originalButtonText;
         submitButton.disabled = false;
-        submitButton.value = "Subscribe"; // Reset to original text
       });
-    }
   });
 </script>
-            <!--  End Brevo Form Integration  -->
           </div>
         </div>
         <div class="glow-banner"></div>
